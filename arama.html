@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beste Detayı</title>
+    <title>Arama Sonuçları - GalaChant</title>
     <link rel="icon" type="image/png" href="64x64.png">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #fff; color: #333; line-height: 1.6; 
+            background-color: #fff; 
+            color: #333; 
+            line-height: 1.6; 
             display: flex; flex-direction: column; min-height: 100vh;
         }
 
@@ -65,30 +67,27 @@
         .dropdown-content a:hover { background-color: #f1f1f1; color: #A90432 !important; }
         .dropdown:hover .dropdown-content { display: block; }
 
-        main { width: 100%; padding: 2rem; flex: 1; max-width: 1200px; margin: 0 auto; }
-        
-        .nav-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
-        .nav-link { text-decoration: none; color: #555; font-weight: bold; font-size: 1.1rem; cursor: pointer; background: none; border: none; padding: 0; display: flex; align-items: center; gap: 5px; font-family: inherit; transition: color 0.3s; }
-        .nav-link:hover { color: #A90432; }
-        .separator { color: #ccc; font-size: 1.2rem; }
+        main { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; flex: 1; width: 100%; }
+        h1 { text-align: center; color: #A90432; margin-bottom: 2rem; }
 
-        h1 { color: #A90432; margin-bottom: 1.5rem; font-size: 2.5rem; text-align: left; }
-        .beste-icerik { font-size: 1.2rem; white-space: pre-wrap; margin-bottom: 3rem; text-align: left; max-width: 900px; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
         
-        .video-bolumu h3 { margin-bottom: 1rem; color: #333; text-align: left; }
-        .video-grid { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: flex-start; }
-        .video-wrapper { width: 100%; max-width: 450px; }
-        iframe { width: 100%; height: 250px; border: none; background: #000; }
-        .no-video-msg { background-color: #f9f9f9; padding: 1rem; border-left: 4px solid #A90432; color: #555; }
-
-        .loader { border: 5px solid #f3f3f3; border-top: 5px solid #A90432; border-bottom: 5px solid #FDB912; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 50px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .beste-card {
+            background-color: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.5rem;
+            display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .beste-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: #FDB912; }
+        .beste-card h3 { margin-bottom: 0.8rem; color: #A90432; font-size: 1.3rem; }
+        .beste-preview { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-bottom: 1.5rem; flex-grow: 1; color: #555; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; border-top: 1px solid #f0f0f0; padding-top: 1rem; margin-top: auto; }
+        .views { font-weight: bold; color: #777; }
+        .read-more { text-decoration: none; color: #A90432; font-weight: bold; transition: color 0.2s; }
+        .read-more:hover { color: #d60036; }
 
         footer { background-color: #222; color: #ccc; text-align: center; padding: 2rem 1rem; margin-top: auto; border-top: 4px solid #A90432; font-size: 0.9rem; }
         footer p { margin-bottom: 0.5rem; }
 
         @media (max-width: 768px) {
-            h1 { font-size: 1.8rem; }
             header {
                 background-image: none;
                 background-color: #A90432;
@@ -126,9 +125,6 @@
             }
             .search-container input { width: 80%; padding: 10px; }
 
-            .nav-row { font-size: 0.9rem; }
-            .video-wrapper { max-width: 100%; }
-
             .dropdown { width: 100%; text-align: center; display: block; margin: 0; }
             .dropbtn { width: 80%; font-size: 1.1rem; padding: 10px; background-color: rgba(0,0,0,0.1); border-radius: 4px; }
             .dropdown-content { position: relative; width: 80%; margin: 0 auto; box-shadow: none; background-color: rgba(0, 0, 0, 0.2); border-top: none; text-align: center; margin-top: 5px; border-radius: 4px; }
@@ -149,10 +145,7 @@
         body.dark-mode .beste-card h3 { color: #FDB912; }
         body.dark-mode .beste-preview { color: #ccc; }
         body.dark-mode .views { color: #888; }
-        body.dark-mode .beste-icerik { color: #ddd; }
         body.dark-mode h1 { color: #FDB912; }
-        body.dark-mode h2 { color: #FDB912; }
-        body.dark-mode .video-bolumu h3 { color: #FDB912; }
 
         body.dark-mode .dropdown-content {
             background-color: #1e1e1e;
@@ -160,11 +153,6 @@
         }
         body.dark-mode .dropdown-content a { color: #e0e0e0 !important; }
         body.dark-mode .dropdown-content a:hover { background-color: #333; }
-
-        body.dark-mode .no-video-msg {
-            background-color: #1e1e1e;
-            color: #888;
-        }
 
         .theme-btn {
             background: none;
@@ -181,6 +169,7 @@
     </style>
 </head>
 <body>
+
     <header>
         <a href="index.html" class="logo"><img src="logo.png" alt="Galatasaray Logo"></a>
         <button class="hamburger-menu">☰</button>
@@ -201,35 +190,27 @@
                 </div>
             </nav>
             <div class="search-container">
-                <input type="text" placeholder="Beste ara...">
+                <input type="text" id="searchInput" placeholder="Beste ara...">
                 <button id="theme-toggle" class="theme-btn" title="Karanlık Mod">🌙</button>
             </div>
         </div>
     </header>
 
     <main>
-        <div id="loading" class="loader"></div>
-
-        <div id="icerik-kutusu" style="display: none;">
-            <div class="nav-row">
-                <a href="index.html" class="nav-link">← Ana Sayfa</a>
-                <span class="separator">|</span>
-                <button id="random-btn" class="nav-link">Rastgele Beste ⟳</button>
-            </div>
-
-            <h1 id="beste-baslik"></h1>
-            <div class="beste-icerik" id="beste-metin"></div>
-
-            <div class="video-bolumu">
-                <h3 id="video-baslik">Videolar</h3>
-                <div class="video-grid" id="video-container"></div>
-            </div>
+        <h1 id="page-title">Arama Sonuçları</h1>
+        <div class="grid-container" id="results-container">
+            <p style="text-align:center; width:100%;">Aranıyor...</p>
         </div>
     </main>
 
+    <footer>
+        <p>&copy; 2025 GalaChant - Taraftar Projesidir.</p>
+        <p>Galatasaray SK ile resmi bir bağı yoktur. Amacımız tribün kültürünü yaşatmaktır.</p>
+    </footer>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, get, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         const firebaseConfig = {
         apiKey: "AIzaSyBrRST7W7IA5hD30TGnDHPJQDISc0qEngs",
@@ -244,22 +225,87 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
-        const urlParams = new URLSearchParams(window.location.search);
-        const currentBesteId = urlParams.get('id');
 
-        const elements = {
-            loading: document.getElementById('loading'),
-            container: document.getElementById('icerik-kutusu'),
-            baslik: document.getElementById('beste-baslik'),
-            metin: document.getElementById('beste-metin'),
-            videoContainer: document.getElementById('video-container'),
-            randomBtn: document.getElementById('random-btn')
-        };
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('q') ? urlParams.get('q').toLowerCase() : "";
+
+        const resultsContainer = document.getElementById('results-container');
+        const pageTitle = document.getElementById('page-title');
+        
+        if(query) {
+            pageTitle.innerText = `"${query}" için sonuçlar`;
+            document.getElementById('searchInput').value = query;
+        } else {
+            pageTitle.innerText = "Tüm Besteler";
+        }
+
+        const bestelerRef = ref(db, 'besteler');
+
+        onValue(bestelerRef, (snapshot) => {
+            const data = snapshot.val();
+            resultsContainer.innerHTML = '';
+
+            if (!data) {
+                resultsContainer.innerHTML = '<p>Veri bulunamadı.</p>';
+                return;
+            }
+
+            let bulunanSayisi = 0;
+
+            Object.keys(data).forEach(key => {
+                const beste = { id: key, ...data[key] };
+                
+                const baslikTemiz = turkceKarakterTemizle(beste.baslik);
+                const icerikTemiz = turkceKarakterTemizle(beste.icerik);
+                const arananTemiz = turkceKarakterTemizle(query);
+
+                if (baslikTemiz.includes(arananTemiz) || icerikTemiz.includes(arananTemiz)) {
+                    resultsContainer.innerHTML += kartOlustur(beste);
+                    bulunanSayisi++;
+                }
+            });
+
+            if (bulunanSayisi === 0) {
+                resultsContainer.innerHTML = `<p style="text-align:center; width:100%; font-size:1.2rem; grid-column: 1 / -1;">Maalesef "${query}" ile ilgili bir beste bulamadık. <br><br> <a href="index.html" style="color:#A90432">Ana sayfaya dön</a></p>`;
+            }
+        });
+
+        function kartOlustur(beste) {
+            const viewCount = beste.okunmaSayisi || 0;
+            let hamIcerik = beste.icerik || ""; 
+            let temizIcerik = hamIcerik.replace(/<br\s*\/?>/gi, ' ').replace(/\\n/g, ' ').replace(/\n/g, ' ');
+            let kisaIcerik = temizIcerik.length > 100 ? temizIcerik.substring(0, 100) + '...' : temizIcerik;
+
+            return `
+                <article class="beste-card">
+                    <h3>${beste.baslik}</h3>
+                    <p class="beste-preview">${kisaIcerik}</p>
+                    <div class="card-footer">
+                        <span class="views">${viewCount} Okunma</span>
+                        <a href="detay.html?id=${beste.id}" class="read-more">Devamını oku...</a>
+                    </div>
+                </article>
+            `;
+        }
+
+        function turkceKarakterTemizle(metin) {
+            if (!metin) return "";
+            return metin
+                .replace(/Ğ/g, 'g').replace(/ğ/g, 'g')
+                .replace(/Ü/g, 'u').replace(/ü/g, 'u')
+                .replace(/Ş/g, 's').replace(/ş/g, 's')
+                .replace(/İ/g, 'i').replace(/ı/g, 'i')
+                .replace(/Ö/g, 'o').replace(/ö/g, 'o')
+                .replace(/Ç/g, 'c').replace(/ç/g, 'c')
+                .toLowerCase();
+        }
 
         const hamburgerBtn = document.querySelector('.hamburger-menu');
         const navContainer = document.querySelector('.nav-container');
-        const searchInput = document.querySelector('.search-container input');
-
+        const searchInput = document.getElementById('searchInput');
+        const themeBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+        
         hamburgerBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             navContainer.style.display = (navContainer.style.display === 'flex') ? 'none' : 'flex';
@@ -273,142 +319,30 @@
             }
         });
 
-        elements.randomBtn.addEventListener('click', async () => {
-            elements.randomBtn.style.opacity = "0.5";
-            elements.randomBtn.innerText = "Seçiliyor...";
-            const bestelerRef = ref(db, 'besteler');
-            const snapshot = await get(bestelerRef);
-            if (snapshot.exists()) {
-                const tumBesteler = snapshot.val();
-                const keys = Object.keys(tumBesteler); 
-                const filteredKeys = keys.filter(k => k !== currentBesteId);
-                if (filteredKeys.length > 0) {
-                    const randomIndex = Math.floor(Math.random() * filteredKeys.length);
-                    const randomId = filteredKeys[randomIndex];
-                    window.location.href = `detay.html?id=${randomId}`;
-                } else {
-                    alert("Başka beste bulunamadı!");
-                    elements.randomBtn.innerText = "Rastgele Beste ⟳";
-                    elements.randomBtn.style.opacity = "1";
-                }
-            }
-        });
-
-        if (currentBesteId) {
-            veriyiGetirVeGuncelle(currentBesteId);
-        } else {
-            elements.loading.style.display = 'none';
-            document.querySelector('main').innerHTML += "<p style='text-align:center'>Hata: Beste ID bulunamadı.</p>";
-        }
-
-        async function veriyiGetirVeGuncelle(id) {
-            const besteRef = ref(db, 'besteler/' + id);
-
-            try {
-                const localStorageKey = 'ziyaret_' + id;
-                
-                if (!localStorage.getItem(localStorageKey)) {
-                    await runTransaction(ref(db, 'besteler/' + id + '/okunmaSayisi'), (currentViews) => {
-                        return (currentViews || 0) + 1;
-                    });
-                    localStorage.setItem(localStorageKey, 'true');
-                }
-
-                const snapshot = await get(besteRef);
-
-                if (snapshot.exists()) {
-                    const data = snapshot.val();
-                    sayfayiDoldur(data);
-                } else {
-                    elements.loading.style.display = 'none';
-                    document.querySelector('main').innerHTML += "<div style='text-align:center; margin-top:20px;'>Böyle bir beste bulunamadı.</div>";
-                }
-
-            } catch (error) {
-                console.error("Hata:", error);
-                elements.loading.style.display = 'none';
-                try {
-                    const snapshot = await get(besteRef);
-                    if(snapshot.exists()) sayfayiDoldur(snapshot.val());
-                } catch(e) {
-                     document.querySelector('main').innerHTML += "<div style='text-align:center; margin-top:20px;'>Veri çekilirken hata oluştu.</div>";
-                }
-            }
-        }
-
-        function sayfayiDoldur(data) {
-            elements.baslik.innerText = data.baslik;
-            elements.metin.innerHTML = data.icerik.replace(/\n/g, '<br>').replace(/\\n/g, '<br>');
-            
-            elements.videoContainer.innerHTML = ''; 
-            if (data.videolar && Array.isArray(data.videolar) && data.videolar.length > 0) {
-                data.videolar.forEach(videoVerisi => {
-                    let videoId = videoVerisi;
-                    let ekParametre = "";
-
-                    if (videoVerisi.includes(',')) {
-                        const parcalar = videoVerisi.split(',');
-                        videoId = parcalar[0].trim();
-                        const saniye = parcalar[1].trim();
-                        ekParametre = `?start=${saniye}`;
-                    }
-
-                    elements.videoContainer.innerHTML += `
-                        <div class="video-wrapper">
-                            <iframe 
-                                src="https://www.youtube.com/embed/${videoId}${ekParametre}" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>`;
-                });
-            } else {
-                elements.videoContainer.innerHTML = `<p class="no-video-msg">Video bulunamadı.</p>`;
-            }
-            elements.loading.style.display = 'none';
-            elements.container.style.display = 'block';
-        }
-
-        const themeBtn = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        const storedTheme = localStorage.getItem('theme');
-
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
-            body.classList.add('dark-mode');
-            if(themeBtn) themeBtn.innerText = '☀️';
-        }
-
-        if(themeBtn) { 
-            themeBtn.addEventListener('click', () => {
-                body.classList.toggle('dark-mode');
-                
-                if (body.classList.contains('dark-mode')) {
-                    themeBtn.innerText = '☀️';
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    themeBtn.innerText = '🌙';
-                    localStorage.setItem('theme', 'light');
-                }
-            });
-        }
-        
-        if(searchInput) { 
+        if(searchInput) {
             searchInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     window.location.href = `arama.html?q=${e.target.value}`;
                 }
             });
         }
+
+        const storedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+            body.classList.add('dark-mode');
+            if(themeBtn) themeBtn.innerText = '☀️';
+        }
+        if(themeBtn) { 
+            themeBtn.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    themeBtn.innerText = '☀️'; localStorage.setItem('theme', 'dark');
+                } else {
+                    themeBtn.innerText = '🌙'; localStorage.setItem('theme', 'light');
+                }
+            });
+        }
     </script>
-    
-    <footer>
-        <p>&copy; 2025 GalaChant - Taraftar Projesidir.</p>
-        <p>Galatasaray SK ile resmi bir bağı yoktur. Amacımız tribün kültürünü yaşatmaktır.</p>
-    </footer>
 </body>
 </html>

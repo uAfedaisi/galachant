@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="64x64.png"> <title>GalaChant - Beste Arşivi</title>
+    <link rel="icon" type="image/png" href="64x64.png"> 
+    <title>GalaChant - Beste Arşivi</title>
     <style>
         * {
             box-sizing: border-box;
@@ -89,6 +90,7 @@
             background: none;
             border: none;
             color: white;
+            z-index: 1002;
         }
 
         main {
@@ -249,18 +251,24 @@
             .logo img {
                 height: 50px;
             }
-           
+            
+            .hamburger-menu { 
+                display: block; 
+            }
+
             .nav-container {
                 display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 280px;
+                height: 100vh;
                 background-color: #A90432;
                 flex-direction: column;
-                padding: 1rem;
-                gap: 1rem;
-                border-bottom: 4px solid #FDB912;
+                padding-top: 80px;
+                gap: 1.5rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+                z-index: 1001;
             }
 
             .nav-links {
@@ -269,35 +277,44 @@
                 width: 100%;
             }
 
+            .nav-links a {
+                font-size: 1.1rem;
+                width: 80%;
+                text-align: center;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
             .search-container {
                 width: 100%;
                 display: flex;
-                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
             }
-            .search-container input { width: 80%; }
-
-            .hamburger-menu { display: block; }
+            .search-container input { width: 80%; padding: 10px; }
 
             .dropdown {
                 width: 100%;
                 text-align: center;
                 display: block;
-                margin: 10px 0;
+                margin: 0;
             }
 
             .dropbtn {
-                width: 100%;
+                width: 80%;
                 font-size: 1.1rem;
                 padding: 10px;
-                background-color: rgba(0,0,0,0.05);
+                background-color: rgba(0,0,0,0.1);
                 border-radius: 4px;
             }
 
             .dropdown-content {
                 position: relative;
-                width: 100%;
+                width: 80%;
+                margin: 0 auto;
                 box-shadow: none;
-                background-color: rgba(0, 0, 0, 0.15);
+                background-color: rgba(0, 0, 0, 0.2);
                 border-top: none;
                 text-align: center;
                 margin-top: 5px;
@@ -307,13 +324,8 @@
             .dropdown-content a {
                 background-color: transparent;
                 color: #fff !important;
-                padding: 15px;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-
-            .dropdown-content a:hover {
-                color: #FDB912 !important;
-                background-color: rgba(0,0,0,0.2);
+                padding: 12px;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
             }
         }
 
@@ -354,13 +366,7 @@
             color: #888;
         }
 
-        body.dark-mode .beste-icerik {
-            color: #ddd;
-        }
-        body.dark-mode h1 {
-            color: #FDB912;
-        }
-        body.dark-mode h2 {
+        body.dark-mode h1, body.dark-mode h2 {
             color: #FDB912;
         }
 
@@ -373,15 +379,6 @@
         }
         body.dark-mode .dropdown-content a:hover {
             background-color: #333;
-        }
-
-        body.dark-mode .rules-box {
-            background-color: #1e1e1e;
-            color: #ccc;
-        }
-        body.dark-mode .rules-box h3, 
-        body.dark-mode .rules-box li {
-            color: #ddd;
         }
 
         .theme-btn {
@@ -513,11 +510,21 @@
 
         function kartOlustur(beste) {
             const viewCount = beste.okunmaSayisi || 0;
+            
+            let hamIcerik = beste.icerik || ""; 
+            
+            let temizIcerik = hamIcerik
+                .replace(/<br\s*\/?>/gi, ' ')
+                .replace(/\\n/g, ' ')
+                .replace(/\n/g, ' ');
+            
+            let kisaIcerik = temizIcerik.length > 100 ? temizIcerik.substring(0, 100) + '...' : temizIcerik;
+
             return `
                 <article class="beste-card">
                     <h3>${beste.baslik}</h3>
                     <p class="beste-preview">
-                        ${beste.icerik}
+                        ${kisaIcerik}
                     </p>
                     <div class="card-footer">
                         <span class="views">${viewCount} Okunma</span>
@@ -567,7 +574,8 @@
             }
         });
 
-        hamburgerBtn.addEventListener('click', () => {
+        hamburgerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             if (navContainer.style.display === 'flex') {
                 navContainer.style.display = 'none';
             } else {
@@ -599,6 +607,22 @@
                     localStorage.setItem('theme', 'light');
                 }
             });
+        }
+        
+        document.addEventListener('click', (event) => {
+            if (navContainer.style.display === 'flex') {
+                if (!navContainer.contains(event.target) && !hamburgerBtn.contains(event.target)) {
+                    navContainer.style.display = 'none';
+                }
+            }
+        });
+
+        if(searchInput) { 
+            searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                window.location.href = `arama.html?q=${e.target.value}`;
+            }
+        });
         }
     </script>
 

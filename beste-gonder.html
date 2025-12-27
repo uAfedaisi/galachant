@@ -41,7 +41,24 @@
         .nav-links { display: flex; gap: 1.5rem; }
         .nav-links a { color: #fff; text-decoration: none; font-weight: 500; transition: opacity 0.3s; }
         .nav-links a:hover { opacity: 0.8; text-decoration: underline; }
-        .hamburger-menu { display: none; font-size: 1.5rem; cursor: pointer; background: none; border: none; color: white; }
+        
+        .hamburger-menu { 
+            display: none; 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+            background: none; 
+            border: none; 
+            color: white; 
+            z-index: 1002;
+        }
+
+        .search-container input {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            font-family: inherit;
+        }
 
         .dropdown { position: relative; display: inline-block; }
         .dropbtn { background-color: transparent; color: white; padding: 0; font-size: 1rem; border: none; cursor: pointer; font-weight: 500; font-family: inherit; }
@@ -75,17 +92,41 @@
                 height: 70px;
             }
 
-            .logo img {
-                height: 50px;
-            }
-            .nav-container { display: none; position: absolute; top: 70px; left: 0; width: 100%; background-color: #A90432; flex-direction: column; padding: 1rem; gap: 1rem; border-bottom: 4px solid #FDB912; }
-            .nav-links { flex-direction: column; align-items: center; width: 100%; }
+            .logo img { height: 50px; }
+            
             .hamburger-menu { display: block; }
-            .dropdown { width: 100%; text-align: center; display: block; margin: 10px 0; }
-            .dropbtn { width: 100%; font-size: 1.1rem; padding: 10px; background-color: rgba(0,0,0,0.05); border-radius: 4px; }
-            .dropdown-content { position: relative; width: 100%; box-shadow: none; background-color: rgba(0, 0, 0, 0.15); border-top: none; text-align: center; margin-top: 5px; border-radius: 4px; }
-            .dropdown-content a { background-color: transparent; color: #fff !important; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-            .dropdown-content a:hover { color: #FDB912 !important; background-color: rgba(0,0,0,0.2); }
+
+            .nav-container {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 280px;
+                height: 100vh;
+                background-color: #A90432;
+                flex-direction: column;
+                padding-top: 80px;
+                gap: 1.5rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+                z-index: 1001;
+            }
+
+            .nav-links { flex-direction: column; align-items: center; width: 100%; }
+            .nav-links a { font-size: 1.1rem; width: 80%; text-align: center; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            
+            .search-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .search-container input { width: 80%; padding: 10px; }
+
+            .dropdown { width: 100%; text-align: center; display: block; margin: 0; }
+            .dropbtn { width: 80%; font-size: 1.1rem; padding: 10px; background-color: rgba(0,0,0,0.1); border-radius: 4px; }
+            .dropdown-content { position: relative; width: 80%; margin: 0 auto; box-shadow: none; background-color: rgba(0, 0, 0, 0.2); border-top: none; text-align: center; margin-top: 5px; border-radius: 4px; }
+            .dropdown-content a { background-color: transparent; color: #fff !important; padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         }
 
         body.dark-mode {
@@ -99,41 +140,23 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.5);
         }
 
-        body.dark-mode .beste-card h3 {
-            color: #FDB912;
-        }
-
-        body.dark-mode .beste-preview {
-            color: #ccc;
-        }
-
-        body.dark-mode .views {
-            color: #888;
-        }
-
-        body.dark-mode .beste-icerik {
-            color: #ddd;
-        }
-        body.dark-mode h1 {
-            color: #FDB912;
-        }
-        body.dark-mode h2 {
-            color: #FDB912;
-        }
+        body.dark-mode .beste-card h3 { color: #FDB912; }
+        body.dark-mode .beste-preview { color: #ccc; }
+        body.dark-mode .views { color: #888; }
+        body.dark-mode .beste-icerik { color: #ddd; }
+        body.dark-mode h1 { color: #FDB912; }
+        body.dark-mode h2 { color: #FDB912; }
 
         body.dark-mode .dropdown-content {
             background-color: #1e1e1e;
             box-shadow: 0 8px 16px rgba(0,0,0,0.5);
         }
-        body.dark-mode .dropdown-content a {
-            color: #e0e0e0 !important;
-        }
-        body.dark-mode .dropdown-content a:hover {
-            background-color: #333;
-        }
+        body.dark-mode .dropdown-content a { color: #e0e0e0 !important; }
+        body.dark-mode .dropdown-content a:hover { background-color: #333; }
 
         body.dark-mode .rules-box {
             background-color: #1e1e1e;
+            border-left-color: #A90432;
             color: #ccc;
         }
         body.dark-mode .rules-box h3, 
@@ -177,7 +200,10 @@
                     </div>
                 </div>
             </nav>
-            <button id="theme-toggle" class="theme-btn" title="Karanlık Mod">🌙</button>
+            <div class="search-container">
+                <input type="text" placeholder="Beste ara...">
+                <button id="theme-toggle" class="theme-btn" title="Karanlık Mod">🌙</button>
+            </div>
         </div>
     </header>
 
@@ -204,8 +230,19 @@
     <script>
         const hamburgerBtn = document.querySelector('.hamburger-menu');
         const navContainer = document.querySelector('.nav-container');
-        hamburgerBtn.addEventListener('click', () => {
+        const searchInput = document.querySelector('.search-container input');
+
+        hamburgerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             navContainer.style.display = (navContainer.style.display === 'flex') ? 'none' : 'flex';
+        });
+
+        document.addEventListener('click', (event) => {
+            if (navContainer.style.display === 'flex') {
+                if (!navContainer.contains(event.target) && !hamburgerBtn.contains(event.target)) {
+                    navContainer.style.display = 'none';
+                }
+            }
         });
 
         const themeBtn = document.getElementById('theme-toggle');
@@ -230,6 +267,14 @@
                 } else {
                     themeBtn.innerText = '🌙';
                     localStorage.setItem('theme', 'light');
+                }
+            });
+        }
+
+        if(searchInput) { 
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    window.location.href = `arama.html?q=${e.target.value}`;
                 }
             });
         }
