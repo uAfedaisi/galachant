@@ -308,7 +308,7 @@
 
         function sayfayiDoldur(data) {
             elements.baslik.innerText = data.baslik;
-            elements.metin.innerText = data.icerik;
+            elements.metin.innerHTML = data.icerik.replace(/\n/g, '<br>').replace(/\\n/g, '<br>');
             elements.videoContainer.innerHTML = ''; 
             if (data.videolar && Array.isArray(data.videolar) && data.videolar.length > 0) {
                 data.videolar.forEach(videoId => {
@@ -356,4 +356,5 @@
         <p>Galatasaray SK ile resmi bir bağı yoktur. Amacımız tribün kültürünü yaşatmaktır.</p>
     </footer>
 </body>
+
 </html>
