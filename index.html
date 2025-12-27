@@ -319,6 +319,9 @@
                 text-align: center;
                 margin-top: 5px;
                 border-radius: 4px;
+
+                top: 0;
+                left: 0;
             }
 
             .dropdown-content a {
@@ -623,6 +626,26 @@
                 window.location.href = `arama.html?q=${e.target.value}`;
             }
         });
+        }
+
+        const dropBtn = document.querySelector('.dropbtn');
+        const dropContent = document.querySelector('.dropdown-content');
+
+        if(dropBtn && dropContent) {
+            dropBtn.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.stopPropagation();
+                    
+                    if (dropContent.style.display === 'block') {
+                        dropContent.style.display = 'none';
+                    } else {
+                        dropContent.style.display = 'block';
+                    }
+                }
+            });
+            dropContent.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
         }
     </script>
 

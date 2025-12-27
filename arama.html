@@ -127,7 +127,7 @@
 
             .dropdown { width: 100%; text-align: center; display: block; margin: 0; }
             .dropbtn { width: 80%; font-size: 1.1rem; padding: 10px; background-color: rgba(0,0,0,0.1); border-radius: 4px; }
-            .dropdown-content { position: relative; width: 80%; margin: 0 auto; box-shadow: none; background-color: rgba(0, 0, 0, 0.2); border-top: none; text-align: center; margin-top: 5px; border-radius: 4px; }
+            .dropdown-content { position: relative; width: 80%; margin: 0 auto; box-shadow: none; background-color: rgba(0, 0, 0, 0.2); border-top: none; text-align: center; margin-top: 5px; border-radius: 4px;  top: 0; left: 0; }
             .dropdown-content a { background-color: transparent; color: #fff !important; padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         }
 
@@ -341,6 +341,26 @@
                 } else {
                     themeBtn.innerText = '🌙'; localStorage.setItem('theme', 'light');
                 }
+            });
+        }
+        
+        const dropBtn = document.querySelector('.dropbtn');
+        const dropContent = document.querySelector('.dropdown-content');
+
+        if(dropBtn && dropContent) {
+            dropBtn.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.stopPropagation();
+                    
+                    if (dropContent.style.display === 'block') {
+                        dropContent.style.display = 'none';
+                    } else {
+                        dropContent.style.display = 'block';
+                    }
+                }
+            });
+            dropContent.addEventListener('click', (e) => {
+                e.stopPropagation();
             });
         }
     </script>
