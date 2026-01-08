@@ -19,7 +19,6 @@
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            
             color: #fff;
             padding: 0 2rem;
             height: 100px;
@@ -40,15 +39,7 @@
         .nav-links a { color: #fff; text-decoration: none; font-weight: 500; transition: opacity 0.3s; }
         .nav-links a:hover { opacity: 0.8; text-decoration: underline; }
         
-        .hamburger-menu { 
-            display: none; 
-            font-size: 1.5rem; 
-            cursor: pointer; 
-            background: none; 
-            border: none; 
-            color: white; 
-            z-index: 1002;
-        }
+        .hamburger-menu { display: none; font-size: 1.5rem; cursor: pointer; background: none; border: none; color: white; z-index: 1002; }
 
         .search-container input {
             padding: 0.5rem 1rem;
@@ -89,41 +80,20 @@
 
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
-            header {
-                background-image: none;
-                background-color: #A90432;
-                height: 70px;
-            }
-
+            header { background-image: none; background-color: #A90432; height: 70px; }
             .logo img { height: 50px; }
-            
             .hamburger-menu { display: block; }
 
             .nav-container {
-                display: none;
-                position: fixed;
-                top: 0;
-                right: 0;
-                width: 280px;
-                height: 100vh;
-                background-color: #A90432;
-                flex-direction: column;
-                padding-top: 80px;
-                gap: 1.5rem;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.3);
-                z-index: 1001;
+                display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh;
+                background-color: #A90432; flex-direction: column; padding-top: 80px; gap: 1.5rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.3); z-index: 1001; overflow-y: auto;
             }
 
             .nav-links { flex-direction: column; align-items: center; width: 100%; }
             .nav-links a { font-size: 1.1rem; width: 80%; text-align: center; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
             
-            .search-container {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
+            .search-container { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 2rem; }
             .search-container input { width: 80%; padding: 10px; }
 
             .nav-row { font-size: 0.9rem; }
@@ -131,52 +101,27 @@
 
             .dropdown { width: 100%; text-align: center; display: block; margin: 0; }
             .dropbtn { width: 80%; font-size: 1.1rem; padding: 10px; background-color: rgba(0,0,0,0.1); border-radius: 4px; }
-            .dropdown-content { position: relative; width: 80%; margin: 0 auto; box-shadow: none; background-color: rgba(0, 0, 0, 0.2); border-top: none; text-align: center; margin-top: 5px; border-radius: 4px;  top: 0; left: 0; }
+            
+            .dropdown-content { 
+                position: relative; width: 80%; margin: 0 auto; box-shadow: none; 
+                background-color: rgba(0, 0, 0, 0.2); border-top: none; text-align: center; 
+                margin-top: 5px; border-radius: 4px; top: 0; left: 0;
+            }
             .dropdown-content a { background-color: transparent; color: #fff !important; padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         }
 
-        body.dark-mode {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-
-        body.dark-mode .beste-card {
-            background-color: #1e1e1e;
-            border-color: #333;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
-        }
-
+        body.dark-mode { background-color: #121212; color: #e0e0e0; }
+        body.dark-mode .beste-card { background-color: #1e1e1e; border-color: #333; box-shadow: 0 4px 6px rgba(0,0,0,0.5); }
         body.dark-mode .beste-card h3 { color: #FDB912; }
         body.dark-mode .beste-preview { color: #ccc; }
-        body.dark-mode .views { color: #888; }
-        body.dark-mode .beste-icerik { color: #ddd; }
-        body.dark-mode h1 { color: #FDB912; }
-        body.dark-mode h2 { color: #FDB912; }
+        body.dark-mode h1, body.dark-mode h2 { color: #FDB912; }
         body.dark-mode .video-bolumu h3 { color: #FDB912; }
-
-        body.dark-mode .dropdown-content {
-            background-color: #1e1e1e;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-        }
+        body.dark-mode .dropdown-content { background-color: #1e1e1e; box-shadow: 0 8px 16px rgba(0,0,0,0.5); }
         body.dark-mode .dropdown-content a { color: #e0e0e0 !important; }
         body.dark-mode .dropdown-content a:hover { background-color: #333; }
+        body.dark-mode .no-video-msg { background-color: #1e1e1e; color: #888; }
 
-        body.dark-mode .no-video-msg {
-            background-color: #1e1e1e;
-            color: #888;
-        }
-
-        .theme-btn {
-            background: none;
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 20px;
-            margin-left: 10px;
-            transition: background 0.3s;
-        }
+        .theme-btn { background: none; border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 1.2rem; cursor: pointer; padding: 5px 10px; border-radius: 20px; margin-left: 10px; transition: background 0.3s; }
         .theme-btn:hover { background-color: rgba(255,255,255,0.2); }
     </style>
 </head>
@@ -229,17 +174,18 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, get, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        // runTransaction ve update gibi yazma işlemlerini çıkardık
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         const firebaseConfig = {
-        apiKey: "AIzaSyBrRST7W7IA5hD30TGnDHPJQDISc0qEngs",
-        authDomain: "bestesite-e998f.firebaseapp.com",
-        databaseURL: "https://bestesite-e998f-default-rtdb.firebaseio.com",
-        projectId: "bestesite-e998f",
-        storageBucket: "bestesite-e998f.firebasestorage.app",
-        messagingSenderId: "440158383568",
-        appId: "1:440158383568:web:807b696dfbf67330981dd5",
-        measurementId: "G-4WY17Z8L1H"
+            apiKey: "AIzaSyBrRST7W7IA5hD30TGnDHPJQDISc0qEngs",
+            authDomain: "bestesite-e998f.firebaseapp.com",
+            databaseURL: "https://bestesite-e998f-default-rtdb.firebaseio.com",
+            projectId: "bestesite-e998f",
+            storageBucket: "bestesite-e998f.firebasestorage.app",
+            messagingSenderId: "440158383568",
+            appId: "1:440158383568:web:807b696dfbf67330981dd5",
+            measurementId: "G-4WY17Z8L1H"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -273,6 +219,23 @@
             }
         });
 
+        // Dropdown menü mobil çözümü
+        const dropBtn = document.querySelector('.dropbtn');
+        const dropContent = document.querySelector('.dropdown-content');
+        if(dropBtn && dropContent) {
+            dropBtn.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.stopPropagation();
+                    if (dropContent.style.display === 'block') {
+                        dropContent.style.display = 'none';
+                    } else {
+                        dropContent.style.display = 'block';
+                    }
+                }
+            });
+            dropContent.addEventListener('click', (e) => { e.stopPropagation(); });
+        }
+
         elements.randomBtn.addEventListener('click', async () => {
             elements.randomBtn.style.opacity = "0.5";
             elements.randomBtn.innerText = "Seçiliyor...";
@@ -305,15 +268,6 @@
             const besteRef = ref(db, 'besteler/' + id);
 
             try {
-                const localStorageKey = 'ziyaret_' + id;
-                
-                if (!localStorage.getItem(localStorageKey)) {
-                    await runTransaction(ref(db, 'besteler/' + id + '/okunmaSayisi'), (currentViews) => {
-                        return (currentViews || 0) + 1;
-                    });
-                    localStorage.setItem(localStorageKey, 'true');
-                }
-
                 const snapshot = await get(besteRef);
 
                 if (snapshot.exists()) {
@@ -327,12 +281,7 @@
             } catch (error) {
                 console.error("Hata:", error);
                 elements.loading.style.display = 'none';
-                try {
-                    const snapshot = await get(besteRef);
-                    if(snapshot.exists()) sayfayiDoldur(snapshot.val());
-                } catch(e) {
-                     document.querySelector('main').innerHTML += "<div style='text-align:center; margin-top:20px;'>Veri çekilirken hata oluştu.</div>";
-                }
+                document.querySelector('main').innerHTML += "<div style='text-align:center; margin-top:20px;'>Veri çekilirken hata oluştu.</div>";
             }
         }
 
@@ -345,7 +294,6 @@
                 data.videolar.forEach(videoVerisi => {
                     let videoId = videoVerisi;
                     let ekParametre = "";
-
                     if (videoVerisi.includes(',')) {
                         const parcalar = videoVerisi.split(',');
                         videoId = parcalar[0].trim();
@@ -373,9 +321,7 @@
 
         const themeBtn = document.getElementById('theme-toggle');
         const body = document.body;
-
         const storedTheme = localStorage.getItem('theme');
-
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
         if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
@@ -386,13 +332,10 @@
         if(themeBtn) { 
             themeBtn.addEventListener('click', () => {
                 body.classList.toggle('dark-mode');
-                
                 if (body.classList.contains('dark-mode')) {
-                    themeBtn.innerText = '☀️';
-                    localStorage.setItem('theme', 'dark');
+                    themeBtn.innerText = '☀️'; localStorage.setItem('theme', 'dark');
                 } else {
-                    themeBtn.innerText = '🌙';
-                    localStorage.setItem('theme', 'light');
+                    themeBtn.innerText = '🌙'; localStorage.setItem('theme', 'light');
                 }
             });
         }
@@ -402,26 +345,6 @@
                 if (e.key === 'Enter') {
                     window.location.href = `arama.html?q=${e.target.value}`;
                 }
-            });
-        }
-        
-        const dropBtn = document.querySelector('.dropbtn');
-        const dropContent = document.querySelector('.dropdown-content');
-
-        if(dropBtn && dropContent) {
-            dropBtn.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
-                    e.stopPropagation();
-                    
-                    if (dropContent.style.display === 'block') {
-                        dropContent.style.display = 'none';
-                    } else {
-                        dropContent.style.display = 'block';
-                    }
-                }
-            });
-            dropContent.addEventListener('click', (e) => {
-                e.stopPropagation();
             });
         }
     </script>

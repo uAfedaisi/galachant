@@ -6,11 +6,7 @@
     <link rel="icon" type="image/png" href="64x64.png"> 
     <title>GalaChant - Beste Arşivi</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -28,7 +24,6 @@
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            
             color: #fff;
             padding: 0 2rem;
             height: 100px;
@@ -42,38 +37,13 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        .logo img {
-            height: 60px;
-            width: auto;
-            transition: transform 0.3s;
-        }
+        .logo img { height: 60px; width: auto; transition: transform 0.3s; }
+        .logo img:hover { transform: scale(1.1); }
 
-        .logo img:hover {
-            transform: scale(1.1);
-        }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.8;
-            text-decoration: underline;
-        }
+        .nav-container { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 500; transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 0.8; text-decoration: underline; }
 
         .search-container input {
             padding: 0.5rem 1rem;
@@ -83,15 +53,7 @@
             font-family: inherit;
         }
 
-        .hamburger-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: white;
-            z-index: 1002;
-        }
+        .hamburger-menu { display: none; font-size: 1.5rem; cursor: pointer; background: none; border: none; color: white; z-index: 1002; }
 
         main {
             max-width: 1200px;
@@ -101,10 +63,7 @@
             width: 100%;
         }
 
-        section {
-            margin-bottom: 4rem;
-        }
-
+        section { margin-bottom: 4rem; }
         section h2 {
             margin-bottom: 1.5rem;
             color: #333;
@@ -136,11 +95,7 @@
             border-color: #FDB912;
         }
 
-        .beste-card h3 {
-            margin-bottom: 0.8rem;
-            color: #A90432;
-            font-size: 1.3rem;
-        }
+        .beste-card h3 { margin-bottom: 0.8rem; color: #A90432; font-size: 1.3rem; }
 
         .beste-preview {
             display: -webkit-box;
@@ -155,17 +110,12 @@
 
         .card-footer {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end; /* Sadece "Devamını oku" sağda kalsın diye */
             align-items: center;
             font-size: 0.9rem;
             border-top: 1px solid #f0f0f0;
             padding-top: 1rem;
             margin-top: auto;
-        }
-
-        .views {
-            font-weight: bold;
-            color: #777;
         }
 
         .read-more {
@@ -187,226 +137,67 @@
             margin: 20px auto;
             grid-column: 1 / -1;
         }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        .dropdown { position: relative; display: inline-block; }
+        .dropbtn { background-color: transparent; color: white; padding: 0; font-size: 1rem; border: none; cursor: pointer; font-weight: 500; font-family: inherit; }
+        .dropdown-content { display: none; position: absolute; background-color: #fff; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1001; border-radius: 4px; top: 100%; left: 0; }
+        .dropdown-content a { color: #333 !important; padding: 12px 16px; text-decoration: none; display: block; font-weight: normal; font-size: 0.95rem; white-space: nowrap; }
+        .dropdown-content a:hover { background-color: #f1f1f1; color: #A90432 !important; }
+        .dropdown:hover .dropdown-content { display: block; }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropbtn {
-            background-color: transparent;
-            color: white;
-            padding: 0;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            font-family: inherit;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #fff;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1001;
-            border-radius: 4px;
-            top: 100%;
-            left: 0;
-        }
-
-        .dropdown-content a {
-            color: #333 !important;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-weight: normal;
-            font-size: 0.95rem;
-            white-space: nowrap;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-            color: #A90432 !important;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
+        /* --- MODERN MOBİL MENÜ TASARIMI --- */
         @media (max-width: 768px) {
-
-            header {
-                background-image: none;
-                background-color: #A90432;
-                height: 70px;
-            }
-
-            .logo img {
-                height: 50px;
-            }
-            
-            .hamburger-menu { 
-                display: block; 
-            }
+            header { background-image: none; background-color: #A90432; height: 70px; }
+            .logo img { height: 50px; }
+            .hamburger-menu { display: block; }
 
             .nav-container {
-                display: none;
-                position: fixed;
-                top: 0;
-                right: 0;
-                width: 280px;
-                height: 100vh;
-                background-color: #A90432;
-                flex-direction: column;
-                padding-top: 80px;
-                gap: 1.5rem;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.3);
-                z-index: 1001;
+                display: none; 
+                position: fixed; top: 0; right: 0; width: 280px; height: 100vh;
+                background-color: #A90432; flex-direction: column; padding-top: 80px; gap: 1.5rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.3); z-index: 1001;
+                overflow-y: auto;
             }
 
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-            }
+            .nav-links { flex-direction: column; align-items: center; width: 100%; }
+            .nav-links a { font-size: 1.1rem; width: 80%; text-align: center; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-            .nav-links a {
-                font-size: 1.1rem;
-                width: 80%;
-                text-align: center;
-                padding-bottom: 10px;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-
-            .search-container {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
+            .search-container { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 2rem; }
             .search-container input { width: 80%; padding: 10px; }
 
-            .dropdown {
-                width: 100%;
-                text-align: center;
-                display: block;
-                margin: 0;
+            .dropdown { width: 100%; text-align: center; display: block; margin: 0; }
+            .dropbtn { width: 80%; font-size: 1.1rem; padding: 10px; background-color: rgba(0,0,0,0.1); border-radius: 4px; }
+
+            .dropdown-content { 
+                position: relative; width: 80%; margin: 0 auto; box-shadow: none; 
+                background-color: rgba(0, 0, 0, 0.2); border-top: none; text-align: center; 
+                margin-top: 5px; border-radius: 4px; top: 0; left: 0;
             }
-
-            .dropbtn {
-                width: 80%;
-                font-size: 1.1rem;
-                padding: 10px;
-                background-color: rgba(0,0,0,0.1);
-                border-radius: 4px;
-            }
-
-            .dropdown-content {
-                position: relative;
-                width: 80%;
-                margin: 0 auto;
-                box-shadow: none;
-                background-color: rgba(0, 0, 0, 0.2);
-                border-top: none;
-                text-align: center;
-                margin-top: 5px;
-                border-radius: 4px;
-
-                top: 0;
-                left: 0;
-            }
-
-            .dropdown-content a {
-                background-color: transparent;
-                color: #fff !important;
-                padding: 12px;
-                border-bottom: 1px solid rgba(255,255,255,0.05);
-            }
+            .dropdown-content a { background-color: transparent; color: #fff !important; padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         }
 
-        footer {
-            background-color: #222;
-            color: #ccc;
-            text-align: center;
-            padding: 2rem 1rem;
-            margin-top: auto;
-            border-top: 4px solid #A90432;
-            font-size: 0.9rem;
-        }
+        footer { background-color: #222; color: #ccc; text-align: center; padding: 2rem 1rem; margin-top: auto; border-top: 4px solid #A90432; font-size: 0.9rem; }
+        footer p { margin-bottom: 0.5rem; }
 
-        footer p {
-            margin-bottom: 0.5rem;
-        }
+        /* DARK MODE */
+        body.dark-mode { background-color: #121212; color: #e0e0e0; }
+        body.dark-mode .beste-card { background-color: #1e1e1e; border-color: #333; box-shadow: 0 4px 6px rgba(0,0,0,0.5); }
+        body.dark-mode .beste-card h3 { color: #FDB912; }
+        body.dark-mode .beste-preview { color: #ccc; }
+        body.dark-mode h1, body.dark-mode h2 { color: #FDB912; }
+        body.dark-mode .dropdown-content { background-color: #1e1e1e; box-shadow: 0 8px 16px rgba(0,0,0,0.5); }
+        body.dark-mode .dropdown-content a { color: #e0e0e0 !important; }
+        body.dark-mode .dropdown-content a:hover { background-color: #333; }
 
-        body.dark-mode {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-
-        body.dark-mode .beste-card {
-            background-color: #1e1e1e;
-            border-color: #333;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
-        }
-
-        body.dark-mode .beste-card h3 {
-            color: #FDB912;
-        }
-
-        body.dark-mode .beste-preview {
-            color: #ccc;
-        }
-
-        body.dark-mode .views {
-            color: #888;
-        }
-
-        body.dark-mode h1, body.dark-mode h2 {
-            color: #FDB912;
-        }
-
-        body.dark-mode .dropdown-content {
-            background-color: #1e1e1e;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-        }
-        body.dark-mode .dropdown-content a {
-            color: #e0e0e0 !important;
-        }
-        body.dark-mode .dropdown-content a:hover {
-            background-color: #333;
-        }
-
-        .theme-btn {
-            background: none;
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 20px;
-            margin-left: 10px;
-            transition: background 0.3s;
-        }
-        .theme-btn:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
+        .theme-btn { background: none; border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 1.2rem; cursor: pointer; padding: 5px 10px; border-radius: 20px; margin-left: 10px; transition: background 0.3s; }
+        .theme-btn:hover { background-color: rgba(255,255,255,0.2); }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="index.html" class="logo">
-            <img src="logo.png" alt="Galatasaray Logo">
-        </a>
-        
+        <a href="index.html" class="logo"><img src="logo.png" alt="Galatasaray Logo"></a>
         <button class="hamburger-menu">☰</button>
 
         <div class="nav-container">
@@ -434,13 +225,6 @@
     </header>
 
     <main>
-        <section id="populer-besteler">
-            <h2>Popüler Besteler</h2>
-            <div class="grid-container">
-                <div class="loader"></div>
-            </div>
-        </section>
-
         <section id="tum-besteler">
             <h2>Tüm Besteler</h2>
             <div class="grid-container">
@@ -454,30 +238,26 @@
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         const firebaseConfig = {
-        apiKey: "AIzaSyBrRST7W7IA5hD30TGnDHPJQDISc0qEngs",
-        authDomain: "bestesite-e998f.firebaseapp.com",
-        databaseURL: "https://bestesite-e998f-default-rtdb.firebaseio.com",
-        projectId: "bestesite-e998f",
-        storageBucket: "bestesite-e998f.firebasestorage.app",
-        messagingSenderId: "440158383568",
-        appId: "1:440158383568:web:807b696dfbf67330981dd5",
-        measurementId: "G-4WY17Z8L1H"
+            apiKey: "AIzaSyBrRST7W7IA5hD30TGnDHPJQDISc0qEngs",
+            authDomain: "bestesite-e998f.firebaseapp.com",
+            databaseURL: "https://bestesite-e998f-default-rtdb.firebaseio.com",
+            projectId: "bestesite-e998f",
+            storageBucket: "bestesite-e998f.firebasestorage.app",
+            messagingSenderId: "440158383568",
+            appId: "1:440158383568:web:807b696dfbf67330981dd5",
+            measurementId: "G-4WY17Z8L1H"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        const populerContainer = document.querySelector('#populer-besteler .grid-container');
         const tumuContainer = document.querySelector('#tum-besteler .grid-container');
         const searchInput = document.querySelector('.search-container input');
         const hamburgerBtn = document.querySelector('.hamburger-menu');
         const navContainer = document.querySelector('.nav-container');
-        
-        const populerSection = document.getElementById('populer-besteler');
         const tumBestelerBaslik = document.querySelector('#tum-besteler h2');
 
         let tumBestelerListesi = [];
-
         const bestelerRef = ref(db, 'besteler');
         
         onValue(bestelerRef, (snapshot) => {
@@ -491,36 +271,28 @@
                     });
                 });
             }
+            
+            tumBestelerListesi.sort((a, b) => {
+                if(a.tarih && b.tarih) return new Date(b.tarih) - new Date(a.tarih);
+                return 0;
+            });
+
             ekraniGuncelle(tumBestelerListesi);
         });
 
         function ekraniGuncelle(liste) {
-            populerContainer.innerHTML = '';
             tumuContainer.innerHTML = '';
-
-            const populerler = [...liste]
-                                .sort((a, b) => (b.okunmaSayisi || 0) - (a.okunmaSayisi || 0))
-                                .slice(0, 4);
-
-            populerler.forEach(beste => {
-                populerContainer.innerHTML += kartOlustur(beste);
-            });
-
             liste.forEach(beste => {
                 tumuContainer.innerHTML += kartOlustur(beste);
             });
         }
 
         function kartOlustur(beste) {
-            const viewCount = beste.okunmaSayisi || 0;
-            
             let hamIcerik = beste.icerik || ""; 
-            
             let temizIcerik = hamIcerik
                 .replace(/<br\s*\/?>/gi, ' ')
                 .replace(/\\n/g, ' ')
                 .replace(/\n/g, ' ');
-            
             let kisaIcerik = temizIcerik.length > 100 ? temizIcerik.substring(0, 100) + '...' : temizIcerik;
 
             return `
@@ -530,7 +302,6 @@
                         ${kisaIcerik}
                     </p>
                     <div class="card-footer">
-                        <span class="views">${viewCount} Okunma</span>
                         <a href="detay.html?id=${beste.id}" class="read-more">Devamını oku...</a>
                     </div>
                 </article>
@@ -554,10 +325,8 @@
             const arananTemiz = turkceKarakterTemizle(hamArama);
             
             if (hamArama.trim().length > 0) {
-                populerSection.style.display = 'none';
                 tumBestelerBaslik.innerText = 'Arama Sonuçları';
             } else {
-                populerSection.style.display = 'block';
                 tumBestelerBaslik.innerText = 'Tüm Besteler';
             }
 
@@ -578,7 +347,7 @@
         });
 
         hamburgerBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
+            e.stopPropagation(); 
             if (navContainer.style.display === 'flex') {
                 navContainer.style.display = 'none';
             } else {
@@ -586,11 +355,33 @@
             }
         });
 
+        document.addEventListener('click', (event) => {
+            if (navContainer.style.display === 'flex') {
+                if (!navContainer.contains(event.target) && !hamburgerBtn.contains(event.target)) {
+                    navContainer.style.display = 'none';
+                }
+            }
+        });
+
+        const dropBtn = document.querySelector('.dropbtn');
+        const dropContent = document.querySelector('.dropdown-content');
+        if(dropBtn && dropContent) {
+            dropBtn.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.stopPropagation();
+                    if (dropContent.style.display === 'block') {
+                        dropContent.style.display = 'none';
+                    } else {
+                        dropContent.style.display = 'block';
+                    }
+                }
+            });
+            dropContent.addEventListener('click', (e) => { e.stopPropagation(); });
+        }
+
         const themeBtn = document.getElementById('theme-toggle');
         const body = document.body;
-
         const storedTheme = localStorage.getItem('theme');
-
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
         if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
@@ -601,50 +392,19 @@
         if(themeBtn) { 
             themeBtn.addEventListener('click', () => {
                 body.classList.toggle('dark-mode');
-                
                 if (body.classList.contains('dark-mode')) {
-                    themeBtn.innerText = '☀️';
-                    localStorage.setItem('theme', 'dark');
+                    themeBtn.innerText = '☀️'; localStorage.setItem('theme', 'dark');
                 } else {
-                    themeBtn.innerText = '🌙';
-                    localStorage.setItem('theme', 'light');
+                    themeBtn.innerText = '🌙'; localStorage.setItem('theme', 'light');
                 }
             });
         }
         
-        document.addEventListener('click', (event) => {
-            if (navContainer.style.display === 'flex') {
-                if (!navContainer.contains(event.target) && !hamburgerBtn.contains(event.target)) {
-                    navContainer.style.display = 'none';
-                }
-            }
-        });
-
         if(searchInput) { 
             searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                window.location.href = `arama.html?q=${e.target.value}`;
-            }
-        });
-        }
-
-        const dropBtn = document.querySelector('.dropbtn');
-        const dropContent = document.querySelector('.dropdown-content');
-
-        if(dropBtn && dropContent) {
-            dropBtn.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
-                    e.stopPropagation();
-                    
-                    if (dropContent.style.display === 'block') {
-                        dropContent.style.display = 'none';
-                    } else {
-                        dropContent.style.display = 'block';
-                    }
+                if (e.key === 'Enter') {
+                    window.location.href = `arama.html?q=${e.target.value}`;
                 }
-            });
-            dropContent.addEventListener('click', (e) => {
-                e.stopPropagation();
             });
         }
     </script>
